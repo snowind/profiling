@@ -31,6 +31,13 @@ class Profiler(object):
         self.top_code = top_code
         self.clear()
 
+    def exclude_code(self, code):
+        """Excludes statistics of the given code."""
+        try:
+            self.stats.remove_child(code)
+        except KeyError:
+            pass
+
     def result(self):
         """Gets the frozen statistics to serialize by Pickle."""
         return FrozenStatistics(self.stats)
